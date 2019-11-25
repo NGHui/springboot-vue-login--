@@ -5,7 +5,10 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
-import VueAxios from 'vue-axios'
+//import VueAxios from 'vue-axiosi
+
+//导入element组件
+import './plugins/element.js'
 
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)

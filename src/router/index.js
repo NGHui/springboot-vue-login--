@@ -3,6 +3,7 @@ import Router from 'vue-router'
 /*@表示src目录*/
 import Login from '../components/Login'
 import Home from '../components/Home'
+import Success from '../components/Success'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ const router = new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+     path: '/success',
+     name: 'Success',
+     component: Success
     }
   ],
 })

@@ -77,17 +77,25 @@
                 this.$refs.form.validate((valid) => {
                     if (valid) {
                         this.logining = true;
-                        if (this.form.name === 'admin' &&
-                            this.form.password === '123456') {
-                            this.logining = false;
-                            sessionStorage.setItem('user', this.form.name);
-                            this.$router.push({ name: '/home' });
-                        } else {
-                            this.logining = false;
-                            this.$alert('name or password wrong!', 'info', {
-                                confirmButtonText: 'ok'
-                            })
-                        }
+                        //填写登陆逻辑
+                        this.$http.post('/api/login',{
+                                username: this.form.name,
+                                password: this.form.password
+                        }).then((res)=>{
+                            console.log(res.data)
+                            if (res.data.code==200){
+                                this.$message.success("登陆成功")
+                                //将后端传递的token放在session域中,放在客户端,减轻服务端的压力
+                                window.sessionStorage.setItem("hui-token",res.data.token)
+                                //跳转路由
+                                this.$router.push('/success')
+                            }else {
+                                this.$message.error("登陆失败")
+
+                            }
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
                     } else {
                         console.log('error submit!');
                         return false;
@@ -113,7 +121,7 @@
     height: 260px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: #fff;
+    background: #f2f2f2;
     border: 1px solid #dcdfe6;
   }
   .loginForm {
